@@ -1,0 +1,23 @@
+name: API Monitor (Shift-Right)
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Check Availability & Response Time < 800ms
+        run: newman run Monitor_Collection.json --env-var "apiKey=${{ secrets.REQRES_API_KEY }}"
