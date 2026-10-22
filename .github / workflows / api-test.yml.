@@ -2,7 +2,7 @@ name: API Test CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
